@@ -1,18 +1,47 @@
 import os
 import yaml
-from .colors import PURPLE, GREEN, YELLOW, BLUE, CYAN, RED, NC
+import pyfiglet
+from .colors import GREEN, LIME, DARK_GREEN, NC, YELLOW, BLUE, CYAN, RED, PURPLE
 from .runner import run_tool
 from .pipeline import run_pipeline
 
 def print_banner():
-    banner = f"""
-{CYAN}╔══════════════════════════════════════════════════════════════╗
-{CYAN}║{NC}               {PURPLE}chinque-bug-bounty v2{NC}                      {CYAN}║
-{CYAN}╠══════════════════════════════════════════════════════════════╣
-{CYAN}║{NC}   Fast • Modular • Colorful • Real-time Tool Launcher     {CYAN}║
-{CYAN}╚══════════════════════════════════════════════════════════════╝{NC}
+    try:
+        main_banner = pyfiglet.figlet_format("CHINQUE-SCAN", font="dosrebel")
+    except pyfiglet.FontNotFound:
+        # Fallback static banner
+        main_banner = r"""
+  ██████╗██╗  ██╗██╗███╗   ██╗ ██████╗ ██╗   ██╗███████╗    ███████╗ ██████╗ █████╗ ███╗   ██╗
+ ██╔════╝██║  ██║██║████╗  ██║██╔═══██╗██║   ██║██╔════╝    ██╔════╝██╔════╝██╔══██╗████╗  ██║
+ ██║     ███████║██║██╔██╗ ██║██║   ██║██║   ██║█████╗      ███████╗██║     ███████║██╔██╗ ██║
+ ██║     ██╔══██║██║██║╚██╗██║██║▄▄ ██║██║   ██║██╔══╝      ╚════██║██║     ██╔══██║██║╚██╗██║
+ ╚██████╗██║  ██║██║██║ ╚████║╚██████╔╝╚██████╔╝███████╗    ███████║╚██████╗██║  ██║██║ ╚████║
+  ╚═════╝╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝ ╚══▀▀═╝  ╚═════╝ ╚══════╝    ╚══════╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═══╝
 """
-    print(banner)
+
+    # Color each line green
+    colored_main = ""
+    for line in main_banner.splitlines():
+        colored_main += f"{GREEN}{line}{NC}\n"
+
+    # Borders (inner width = 58 characters of '═')
+    border_top = f"{LIME}╔══════════════════════════════════════════════════════════════╗{NC}"
+    border_bottom = f"{LIME}╚══════════════════════════════════════════════════════════════╝{NC}"
+
+    # New subtitle with exit hint
+    subtitle_text = "bug-bounty-pipeline _ full scan 2.0v - exit (ctrl + z or c)"
+    inner_width = 58
+    subtitle_len = len(subtitle_text)
+    left_pad = (inner_width - subtitle_len) // 2
+    right_pad = inner_width - subtitle_len - left_pad
+    centered_subtitle = f"{DARK_GREEN}{' ' * left_pad}{subtitle_text}{' ' * right_pad}{NC}"
+    subtitle_line = f"{LIME}║{centered_subtitle}║"
+
+    print(border_top)
+    print(colored_main, end='')
+    print(subtitle_line)
+    print(border_bottom)
+    print()
 
 def clear():
     os.system('clear' if os.name == 'posix' else 'cls')
@@ -22,7 +51,6 @@ def interactive_menu():
     with open('config/tools.yaml') as f:
         tools_config = yaml.safe_load(f)
 
-    # Organize by category
     TOOLS = {}
     for tool_name, data in tools_config.items():
         cat = data.get('category', 'Other')
@@ -32,7 +60,6 @@ def interactive_menu():
             'template': data['command']
         })
 
-    # Sort categories naturally (by the numeric prefix)
     categories = sorted(TOOLS.keys())
 
     while True:
@@ -41,6 +68,7 @@ def interactive_menu():
         print(f"{YELLOW}=== MAIN MENU - Choose Category ==={NC}\n")
         for i, cat in enumerate(categories, 1):
             print(f"{BLUE}{i}.{NC} {cat}")
+        # Add Full Scan as option 0 (or as an extra category)
         print(f"{BLUE}0.{NC} {PURPLE}Full Scan (Full Recon Pipeline){NC}")
         print()
 
