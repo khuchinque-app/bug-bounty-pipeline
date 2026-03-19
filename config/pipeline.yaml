@@ -1,0 +1,49 @@
+full:
+  - name: "1. Subdomain Enumeration"
+    tools:
+      - name: subfinder
+      - name: assetfinder
+      - name: amass
+      - name: findomain
+      - name: httpx
+  - name: "2. URL Collection & Crawling"
+    tools:
+      - name: gau
+      - name: waybackurls
+      - name: katana
+      - name: hakrawler
+  - name: "3. JavaScript Analysis"
+    tools:
+      - name: linkfinder
+      - name: secretfinder
+  - name: "4. Directory & Parameter Discovery"
+    tools:
+      - name: ffuf
+      - name: feroxbuster
+      - name: arjun
+      - name: paramspider
+      - name: x8
+  - name: "5. Vulnerability Scanning"
+    tools:
+      - name: nuclei
+      - name: dalfox
+      - name: crlfuzz
+      - name: tplmap
+  - name: "6. API & GraphQL Testing"
+    tools:
+      - name: graphqlmap
+  - name: "7. Cloud Misconfiguration"
+    tools:
+      - name: s3scanner
+      - name: interlace
+
+recon:
+  - name: "Reconnaissance"
+    tools:
+      - name: subfinder
+      - name: httpx
+
+scan:
+  - name: "Vulnerability Scan"
+    tools:
+      - name: nuclei

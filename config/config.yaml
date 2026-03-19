@@ -1,0 +1,10 @@
+paths:
+  wordlists: "/home/admin1/SecLists/Discovery/Web-Content"
+  nuclei_templates: "~/nuclei-templates"
+
+notifications:
+  slack_webhook: ""
+  discord_webhook: ""
+
+database:
+  url: "sqlite:///data/pipeline.db"

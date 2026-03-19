@@ -1,0 +1,144 @@
+# ==================== 1. Subdomain Enumeration ====================
+subfinder:
+  command: "subfinder -d {target} -silent"
+  category: "1. Subdomain Enumeration"
+  desc: "Fast passive subdomain finder"
+  timeout: 300
+
+assetfinder:
+  command: "assetfinder --subs-only {target}"
+  category: "1. Subdomain Enumeration"
+  desc: "Asset + subdomain finder"
+  timeout: 300
+
+amass:
+  command: "amass enum -passive -d {target}"
+  category: "1. Subdomain Enumeration"
+  desc: "OWASP Amass (passive)"
+  timeout: 600
+
+findomain:
+  command: "findomain -t {target} -q"
+  category: "1. Subdomain Enumeration"
+  desc: "Findomain subdomain enum"
+  timeout: 300
+
+httpx:
+  command: "httpx -u {target} -silent"
+  category: "1. Subdomain Enumeration"
+  desc: "Live host probe"
+  timeout: 60
+
+# ==================== 2. URL Collection & Crawling ====================
+gau:
+  command: "gau {target} --subs"
+  category: "2. URL Collection & Crawling"
+  desc: "GetAllUrls from archives"
+  timeout: 300
+
+waybackurls:
+  command: "echo {target} | waybackurls"
+  category: "2. URL Collection & Crawling"
+  desc: "Wayback machine URLs"
+  timeout: 300
+
+katana:
+  command: "katana -u {target} -silent -jc -kf all -aff"
+  category: "2. URL Collection & Crawling"
+  desc: "Modern web crawler"
+  timeout: 600
+
+hakrawler:
+  command: "echo {target} | hakrawler -subs -plain"
+  category: "2. URL Collection & Crawling"
+  desc: "Hakrawler"
+  timeout: 300
+
+# ==================== 3. JavaScript Analysis ====================
+linkfinder:
+  command: "linkfinder -i {target} -o cli"
+  category: "3. JavaScript Analysis"
+  desc: "Extract endpoints (use JS URL)"
+  timeout: 120
+
+secretfinder:
+  command: "secretfinder -i {target} -o cli"
+  category: "3. JavaScript Analysis"
+  desc: "Find secrets in JS (use JS URL)"
+  timeout: 120
+
+# ==================== 4. Directory & Parameter Discovery ====================
+ffuf:
+  command: "ffuf -u {target}/FUZZ -w {{paths.wordlists}}/directory-list-2.3-medium.txt -t 50 -ac"
+  category: "4. Directory & Parameter Discovery"
+  desc: "Fast directory brute (medium wordlist)"
+  timeout: 3600
+
+feroxbuster:
+  command: "feroxbuster -u {target} -w {{paths.wordlists}}/directory-list-2.3-medium.txt -t 50"
+  category: "4. Directory & Parameter Discovery"
+  desc: "Recursive directory brute"
+  timeout: 3600
+
+arjun:
+  command: "arjun -u {target}"
+  category: "4. Directory & Parameter Discovery"
+  desc: "Hidden parameter finder"
+  timeout: 600
+
+paramspider:
+  command: "paramspider -d {target} -l high"
+  category: "4. Directory & Parameter Discovery"
+  desc: "Parameter spider"
+  timeout: 300
+
+x8:
+  command: "x8 -u {target}"
+  category: "4. Directory & Parameter Discovery"
+  desc: "Parameter fuzzer"
+  timeout: 600
+
+# ==================== 5. Vulnerability Scanning ====================
+nuclei:
+  command: "nuclei -u {target} -t {{paths.nuclei_templates}} -severity low,medium,high,critical"
+  category: "5. Vulnerability Scanning"
+  desc: "Nuclei template scanner"
+  timeout: 3600
+
+dalfox:
+  command: "dalfox url {target}"
+  category: "5. Vulnerability Scanning"
+  desc: "Powerful XSS scanner"
+  timeout: 600
+
+crlfuzz:
+  command: "crlfuzz -u {target}"
+  category: "5. Vulnerability Scanning"
+  desc: "CRLF injection tester"
+  timeout: 120
+
+tplmap:
+  command: "tplmap -u {target}"
+  category: "5. Vulnerability Scanning"
+  desc: "Server‑side template injection scanner"
+  timeout: 300
+
+# ==================== 6. API & GraphQL Testing ====================
+graphqlmap:
+  command: "graphqlmap -u {target}"
+  category: "6. API & GraphQL Testing"
+  desc: "GraphQL mapping (use /graphql endpoint)"
+  timeout: 300
+
+# ==================== 7. Cloud Misconfiguration ====================
+s3scanner:
+  command: "s3scanner -bucket {target}"
+  category: "7. Cloud Misconfiguration"
+  desc: "S3 bucket checker"
+  timeout: 120
+
+interlace:
+  command: "interlace -t {target} -o /dev/null"   # placeholder, adjust as needed
+  category: "7. Cloud Misconfiguration"
+  desc: "Interlace (multi‑tool wrapper)"
+  timeout: 300

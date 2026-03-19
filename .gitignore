@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+env/
+venv/
+env-hack/
+ENV/
+
+# Output & logs
+output/
+logs/
+*.log
+tmux-*.log
+
+# Wordlists (if you don't want to commit large wordlists)
+wordlists/
+data/wordlists/
+
+# Config with secrets (if any)
+config/config.yaml   # if you put real API keys, but yours is fine
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# VSCode
+.vscode/
+.idea/

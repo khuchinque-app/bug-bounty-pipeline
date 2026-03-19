@@ -1,0 +1,37 @@
+bug-bounty-pipeline/
+│
+├├── src/
+│   ├── __init__.py          (must exist, even if empty)
+│   ├── cli.py
+│   ├── colors.py            (create this!)
+│   ├── menu.py
+│   ├── pipeline.py
+│   ├── runner.py
+│   ├── models.py
+│   ├── scope.py
+│   ├── notifications.py
+│   └── utils.py
+├── config/
+│   ├── config.yaml
+│   ├── tools.yaml
+│   └── pipeline.yaml
+
+├── 📁 data/                            # Static data (wordlists, scope files)
+│   ├── wordlists/
+│   │   └── directory-list-2.3-medium.txt
+│   └── scopes/
+│       └── example_scope.json
+│
+├── 📁 output/                          # Auto‑created, per‑run results
+│   └── (timestamped folders)
+│
+├── 📁 logs/                            # Auto‑created, application logs
+│   └── pipeline.log
+│
+├── 📁 tests/                           # Unit tests (optional but recommended)
+│   └── test_runner.py
+│
+├── Dockerfile                          # Containerisation
+├── requirements.txt                    # Python dependencies
+├── setup.py                             # For pip install -e .
+└── README.md                             # You asked for this!
